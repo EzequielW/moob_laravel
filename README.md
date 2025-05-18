@@ -2,7 +2,7 @@
 
 A full-featured messaging platform built using **Laravel 12** and **Inertia.js + Vue 3**, enabling users to send messages via Telegram, WhatsApp, Discord, and Slack, complete with file attachments, job queues, and statistics.
 
----
+<br>
 
 ## 🚀 Features
 
@@ -18,7 +18,7 @@ A full-featured messaging platform built using **Laravel 12** and **Inertia.js +
 - ✅ SSR-friendly Vue 3 + ApexCharts
 - ✅ Full Docker-based development setup
 
----
+<br>
 
 ## 📦 Tech Stack
 
@@ -31,13 +31,13 @@ A full-featured messaging platform built using **Laravel 12** and **Inertia.js +
 - Laravel Queues + Cache
 - Telegram Bot API (real messages)
 
----
+<br>
 
 ## ✅ Why Breeze + Inertia?
 
 Laravel Breeze with Inertia.js gives a great balance between a modern frontend (Vue 3) and tight Laravel integration. It allows us to build SPAs while using Laravel routing and controllers, and simplifies auth scaffolding.
 
----
+<br>
 
 ## 📁 Project Structure
 
@@ -49,7 +49,7 @@ Laravel Breeze with Inertia.js gives a great balance between a modern frontend (
 - `app/Http/Controllers/StatsController.php`: Handles grouping queries for stats generation
 - `routes/web.php` & `routes/api.php`: Define app and API routes
 
----
+<br>
 
 ## 🔄 Backend Routes
 
@@ -60,7 +60,18 @@ Laravel Breeze with Inertia.js gives a great balance between a modern frontend (
 | POST   | `/messages`        | Send a message (web)                          |
 | POST   | `/api/messages`    | Send a message via API                        |
 
----
+#### API Request Example:
+
+```json
+{
+    "platform": "discord",
+    "recipients": ["username#1234"],
+    "content": "Hello world",
+    "attachment": null
+}
+```
+
+<br>
 
 ## 🌐 Frontend Views
 
@@ -70,7 +81,7 @@ Laravel Breeze with Inertia.js gives a great balance between a modern frontend (
 | `Send.vue`        | Form to send messages                |
 | `Sent.vue`        | Paginated sent messages table        |
 
----
+<br>
 
 ## 🛠 Setup Instructions
 
@@ -103,7 +114,7 @@ docker compose up -d queue
 
 - Frontend: [http://localhost:8080](http://localhost:8080) (user: `test@example.com`, pass: `12345678`)
 
----
+<br>
 
 ## 🤖 Telegram Bot Setup
 
@@ -119,7 +130,7 @@ TELEGRAM_BOT_TOKEN=your_token_here
 3. **Important**: You must initiate a chat with the bot before it can send you a message and your username must be set.
 4. You can now send messages to that chat ID.
 
----
+<br>
 
 ## 🧪 Testing
 
@@ -135,7 +146,7 @@ Run tests:
 php artisan test
 ```
 
----
+<br>
 
 ## 📌 Design Patterns Used
 
@@ -146,14 +157,14 @@ php artisan test
 - **Cache**: Optimizes message listing queries.
 - **Service Providers**: Encapsulate bootstrapping logic.
 
----
+<br>
 
 ## 📌 Notes
 
 - Telegram only sends messages to users who **have initiated a conversation with the bot**.
 - File upload size is configurable via `.env` (`MAX_UPLOAD_SIZE_MB`).
 
----
+<br>
 
 ## 📬 Contact
 

@@ -30,8 +30,7 @@ COPY . .
 RUN composer install --no-interaction --no-progress --prefer-dist
 
 # Fix permissions for Laravel
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
-    && chmod -R ug+rwX /var/www/storage /var/www/bootstrap/cache
+RUN chown -R 1000:1000 /var/www/storage /var/www/bootstrap/cache
 
 # Expose PHP-FPM port
 EXPOSE 9000
