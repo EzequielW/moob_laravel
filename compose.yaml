@@ -9,6 +9,7 @@ services:
       - 9000
     volumes:
       - ./:/var/www
+      - /var/www/vendor
     user: "1000:1000"
     networks:
       - messaging_app
@@ -16,25 +17,23 @@ services:
       - mysql
     env_file:
       - .env
-    profiles:
-      - dev
+    profiles: ["dev"]
 
   frontend:
     build:
       context: .
       dockerfile: ./docker/node/Dockerfile
     container_name: messaging_frontend
-    working_dir: /var/www
     volumes:
       - ./:/var/www
+      - /var/www/node_modules
     ports:
       - "5173:5173"
     depends_on:
       - messaging_app
     networks:
       - messaging_app
-    profiles:
-      - dev
+    profiles: ["dev"]
 
   nginx:
     image: nginx:latest
@@ -49,8 +48,7 @@ services:
       - frontend
     networks:
       - messaging_app
-    profiles:
-      - dev
+    profiles: ["dev"]
 
   mysql:
     image: mysql:8.0
@@ -67,8 +65,7 @@ services:
       - database_data:/var/lib/mysql
     networks:
       - messaging_app
-    profiles:
-      - dev
+    profiles: ["dev"]
       
   migrations:
     build:
@@ -77,6 +74,7 @@ services:
     command: php artisan migrate --seed
     volumes:
       - .:/var/www
+      - /var/www/vendor
     depends_on:
       - mysql
       - messaging_app
@@ -85,6 +83,7 @@ services:
     restart: "no"
     env_file:
       - .env
+      
   scheduler:
     build:
       context: .
@@ -92,6 +91,7 @@ services:
     container_name: scheduler
     volumes:
       - .:/var/www
+      - /var/www/vendor
     depends_on:
       - messaging_app
     command: php artisan schedule:work
@@ -99,8 +99,7 @@ services:
       - messaging_app
     env_file:
       - .env
-    profiles:
-      - dev
+    profiles: ["dev"]
 
   queue:
     build:
@@ -109,6 +108,7 @@ services:
     container_name: queue
     volumes:
       - .:/var/www
+      - /var/www/vendor
     command: php artisan queue:work
     networks:
       - messaging_app
